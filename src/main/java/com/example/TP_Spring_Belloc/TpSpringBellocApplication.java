@@ -12,8 +12,8 @@ public class TpSpringBellocApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TpSpringBellocApplication.class, args);
 	}
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
+	@GetMapping("/bonjour")
+	public String hello(@RequestParam(value = "name", defaultValue = "monde") String name) {
+		return String.format("Bonjour le %s!", name);
 	}
 }
