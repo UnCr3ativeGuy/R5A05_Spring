@@ -1,6 +1,11 @@
 package com.example.TP_Spring_Belloc;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {

@@ -8,9 +8,11 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository repository;
+    private final ArticleRepository articleRepository;
 
-    public UserController(UserRepository repository) {
+    public UserController(UserRepository repository, ArticleRepository articleRepository) {
         this.repository = repository;
+        this.articleRepository = articleRepository;
     }
 
     // Aggregate root
@@ -33,14 +35,19 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @GetMapping("/users/{id}/articles")
+    List<Article> allArticles(@PathVariable Long id) {
+        return articleRepository.findAll();
+    }
+
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(employee -> {
-                    employee.setName(newUser.getName());
-                    employee.setRole(newUser.getRole());
-                    return repository.save(employee);
+                .map(user -> {
+                    user.setName(newUser.getName());
+                    user.setRole(newUser.getRole());
+                    return repository.save(user);
                 })
                 .orElseGet(() -> {
                     return repository.save(newUser);
