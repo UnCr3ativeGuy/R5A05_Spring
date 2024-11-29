@@ -1,4 +1,4 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-class UserNotFoundAdvice {
+class ArticleNotFoundAdvice {
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(ArticleNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(UserNotFoundException ex) {
+    String articleNotFoundHandler(ArticleNotFoundException ex) {
         return ex.getMessage();
     }
 }

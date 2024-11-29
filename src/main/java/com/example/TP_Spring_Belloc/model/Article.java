@@ -1,8 +1,5 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

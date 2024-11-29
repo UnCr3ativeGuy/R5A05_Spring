@@ -1,8 +1,7 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.repository;
 
+import com.example.TP_Spring_Belloc.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 }

@@ -1,7 +1,7 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.repository;
 
+import com.example.TP_Spring_Belloc.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 

@@ -1,7 +1,7 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.exception;
 
 public class ArticleNotFoundException extends RuntimeException {
-    ArticleNotFoundException(Long id) {
+    public ArticleNotFoundException(Long id) {
         super("Could not find article " + id);
     }
 }

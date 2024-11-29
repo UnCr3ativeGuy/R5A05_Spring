@@ -1,5 +1,11 @@
-package com.example.TP_Spring_Belloc;
+package com.example.TP_Spring_Belloc.controller;
 
+import com.example.TP_Spring_Belloc.exception.ArticleNotFoundException;
+import com.example.TP_Spring_Belloc.repository.ArticleRepository;
+import com.example.TP_Spring_Belloc.exception.UserNotFoundException;
+import com.example.TP_Spring_Belloc.repository.UserRepository;
+import com.example.TP_Spring_Belloc.model.Article;
+import com.example.TP_Spring_Belloc.model.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
