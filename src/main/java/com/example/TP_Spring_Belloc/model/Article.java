@@ -20,6 +20,12 @@ public class Article {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
+    @Transient
+    private int likesCount;
+
+    @Transient
+    private int dislikesCount;
+
     public Long getId() {
         return id;
     }
@@ -50,5 +56,21 @@ public class Article {
 
     public void setPublicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public int getDislikesCount() {
+        return dislikesCount;
+    }
+
+    public void setDislikesCount(int dislikesCount) {
+        this.dislikesCount = dislikesCount;
     }
 }

@@ -13,11 +13,9 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository repository;
-    private final ArticleRepository articleRepository;
 
     public UserController(UserRepository repository, ArticleRepository articleRepository) {
         this.repository = repository;
-        this.articleRepository = articleRepository;
     }
 
     // Aggregate root
