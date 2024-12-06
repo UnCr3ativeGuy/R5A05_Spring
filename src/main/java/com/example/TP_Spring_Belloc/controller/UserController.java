@@ -35,19 +35,19 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     User one(@PathVariable Long id) {
-
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @GetMapping("/users/{id}/articles")
     List<Article> allArticles(@PathVariable Long id) {
-        return articleRepository.findAll();
+        User user = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return user.getArticles();
     }
 
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
-
         return repository.findById(id)
                 .map(user -> {
                     user.setName(newUser.getName());
