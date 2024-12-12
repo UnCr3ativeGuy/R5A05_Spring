@@ -4,12 +4,10 @@ import com.example.TP_Spring_Belloc.exception.ArticleNotFoundException;
 import com.example.TP_Spring_Belloc.exception.UserNotFoundException;
 import com.example.TP_Spring_Belloc.model.Article;
 import com.example.TP_Spring_Belloc.model.Reaction;
-import com.example.TP_Spring_Belloc.model.ReactionType;
 import com.example.TP_Spring_Belloc.model.User;
 import com.example.TP_Spring_Belloc.repository.ArticleRepository;
 import com.example.TP_Spring_Belloc.repository.ReactionRepository;
 import com.example.TP_Spring_Belloc.repository.UserRepository;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,8 +28,8 @@ public class ArticleService {
     public List<Article> findAllArticles() {
         return articleRepository.findAll().stream()
                 .map(article -> {
-                    int likesCount = reactionRepository.countByArticleAndType(article, ReactionType.LIKE);
-                    int dislikesCount = reactionRepository.countByArticleAndType(article, ReactionType.DISLIKE);
+                    int likesCount = reactionRepository.countByArticleAndLiked(article, true);
+                    int dislikesCount = reactionRepository.countByArticleAndLiked(article, false);
 
                     article.setLikesCount(likesCount);
                     article.setDislikesCount(dislikesCount);
@@ -53,8 +51,8 @@ public class ArticleService {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new ArticleNotFoundException(id));
 
-        int likesCount = reactionRepository.countByArticleAndType(article, ReactionType.LIKE);
-        int dislikesCount = reactionRepository.countByArticleAndType(article, ReactionType.DISLIKE);
+        int likesCount = reactionRepository.countByArticleAndLiked(article, true);
+        int dislikesCount = reactionRepository.countByArticleAndLiked(article, false);
 
         article.setLikesCount(likesCount);
         article.setDislikesCount(dislikesCount);
@@ -86,7 +84,7 @@ public class ArticleService {
         Reaction newReaction = new Reaction();
         newReaction.setArticle(article);
         newReaction.setUser(user);
-        newReaction.setType(ReactionType.LIKE);
+        newReaction.setType(true);
         return reactionRepository.save(newReaction);
     }
 
@@ -99,7 +97,7 @@ public class ArticleService {
         Reaction newReaction = new Reaction();
         newReaction.setArticle(article);
         newReaction.setUser(user);
-        newReaction.setType(ReactionType.DISLIKE);
+        newReaction.setType(false);
         return reactionRepository.save(newReaction);
     }
 }

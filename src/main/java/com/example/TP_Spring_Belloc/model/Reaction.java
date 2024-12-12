@@ -18,9 +18,9 @@ public class Reaction {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Enumerated(EnumType.STRING)
+    // 0 -> Dislike , 1-> Like
     @Column(nullable = false)
-    private ReactionType type;
+    private Boolean liked;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class Reaction {
         this.user = user;
     }
 
-    public ReactionType getType() {
-        return type;
+    public Boolean getType() {
+        return liked;
     }
 
-    public void setType(ReactionType type) {
-        this.type = type;
+    public void setType(Boolean liked) {
+        this.liked = liked;
     }
 }
