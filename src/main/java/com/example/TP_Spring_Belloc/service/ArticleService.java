@@ -11,6 +11,7 @@ import com.example.TP_Spring_Belloc.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ArticleService {
@@ -80,11 +81,20 @@ public class ArticleService {
                 .orElseThrow(() -> new ArticleNotFoundException(id));
         User user = userRepository.findById(id_user)
                 .orElseThrow(() -> new UserNotFoundException(id_user));
-        if(reactionRepository.existsByArticleAndUser(article, user)) return null;
+        Optional<Reaction> reaction = reactionRepository.findByArticleAndUser(article, user);
+        if(reaction.isPresent()) {
+            Reaction oldReaction = reaction.get();
+            if(oldReaction.getLiked()) {
+                return null;
+            } else {
+                oldReaction.setLiked(true);
+                return reactionRepository.save(oldReaction);
+            }
+        }
         Reaction newReaction = new Reaction();
         newReaction.setArticle(article);
         newReaction.setUser(user);
-        newReaction.setType(true);
+        newReaction.setLiked(true);
         return reactionRepository.save(newReaction);
     }
 
@@ -93,11 +103,20 @@ public class ArticleService {
                 .orElseThrow(() -> new ArticleNotFoundException(id));
         User user = userRepository.findById(id_user)
                 .orElseThrow(() -> new UserNotFoundException(id_user));
-        if(reactionRepository.existsByArticleAndUser(article, user)) return null;
+        Optional<Reaction> reaction = reactionRepository.findByArticleAndUser(article, user);
+        if(reaction.isPresent()) {
+            Reaction oldReaction = reaction.get();
+            if(!oldReaction.getLiked()) {
+                return null;
+            } else {
+                oldReaction.setLiked(false);
+                return reactionRepository.save(oldReaction);
+            }
+        }
         Reaction newReaction = new Reaction();
         newReaction.setArticle(article);
         newReaction.setUser(user);
-        newReaction.setType(false);
+        newReaction.setLiked(false);
         return reactionRepository.save(newReaction);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.TP_Spring_Belloc.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Reaction {
@@ -46,11 +45,11 @@ public class Reaction {
         this.user = user;
     }
 
-    public Boolean getType() {
+    public Boolean getLiked() {
         return liked;
     }
 
-    public void setType(Boolean liked) {
+    public void setLiked(Boolean liked) {
         this.liked = liked;
     }
 }
